@@ -12,7 +12,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         NewGame();  
+    }
 
+    private void Update()
+    {
+        if(lives <= 0 && Input.anyKeyDown)
+        {
+            NewGame();
+        }
     }
 
     private void NewGame()
