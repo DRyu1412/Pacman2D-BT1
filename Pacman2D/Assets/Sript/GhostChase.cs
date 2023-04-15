@@ -26,7 +26,7 @@ public class GhostChase : GhostBehavior
                     minDistance = distance;
                 }
             }
-            this.ghost.movement.SetDirection(direction);
+            this.ghost.movement.SetDirection(direction); 
         }
     }
 }
