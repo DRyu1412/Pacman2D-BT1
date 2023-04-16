@@ -416,6 +416,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0
+  inside: {fileID: 0}
+  outside: {fileID: 0}
 --- !u!114 &6520829239874588609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +457,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 8
+  body: {fileID: 7470166353122491921}
+  eyes: {fileID: 4138570453322077231}
+  blue: {fileID: 15179346248091128}
+  white: {fileID: 6634468604021909617}
 --- !u!1 &4465295281073474806
 GameObject:
   m_ObjectHideFlags: 0

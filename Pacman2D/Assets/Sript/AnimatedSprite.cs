@@ -38,7 +38,7 @@ public class AnimatedSprite : MonoBehaviour
         }
     }
 
-    private void Restart()
+    public void Restart()
     {
         this.animaitonFrame = -1;
         Advance();

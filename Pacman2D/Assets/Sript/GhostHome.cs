@@ -20,7 +20,6 @@ public class GhostHome : GhostBehavior
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(true);
         if (this.enabled && collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             this.ghost.movement.SetDirection(-this.ghost.movement.direction);
