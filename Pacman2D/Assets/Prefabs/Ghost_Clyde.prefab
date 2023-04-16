@@ -62,7 +62,7 @@ PrefabInstance:
     - target: {fileID: 6129474075658897415, guid: f05ea251d7dbc0b4f8c01c6ac135206a, type: 3}
       propertyPath: initialBehavior
       value: 
-      objectReference: {fileID: 953781943172102664, guid: 65eb9f14bbaa7b74aa98c9143f0d80a9, type: 3}
+      objectReference: {fileID: 785988900167110076}
     - target: {fileID: 7470166353122491921, guid: f05ea251d7dbc0b4f8c01c6ac135206a, type: 3}
       propertyPath: m_Color.b
       value: 0.33333334
@@ -81,3 +81,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f05ea251d7dbc0b4f8c01c6ac135206a, type: 3}
+--- !u!114 &785988900167110076 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -4193024012393388756, guid: f05ea251d7dbc0b4f8c01c6ac135206a, type: 3}
+  m_PrefabInstance: {fileID: 5703534453100882064}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3aa52cb9295d5438d9835f080b1957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
