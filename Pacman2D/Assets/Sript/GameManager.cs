@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IDataPersistence
 {
     public Ghost[] ghosts;
     public Pacman pacman;
@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverText;
     public Text scoreText;
     public Text livesText;
+    public Text highestScoreText;
 
     [SerializeField]
     private AudioSource audioSource;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     public int ghostMultiplier { get; private set; } = 1;
     public int score { get; private set; }
+    public int highestScore { get; private set; } = 0;
     public int lives { get; private set; }
 
     private void Start()
@@ -37,11 +39,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     private void NewGame()
     {
         SetScore(0);
         SetLife(3);
         NewRound();
+        highestScoreText.text = "highest: " +  highestScore.ToString().PadLeft(2, '0');
     }
     
     private void NewRound()
@@ -111,6 +115,11 @@ public class GameManager : MonoBehaviour
         else
         {
             GameOver();
+            if(this.score > this.highestScore)
+            {
+                this.highestScore = this.score;
+                highestScoreText.text = "highest: " + highestScore.ToString().PadLeft(2, '0');
+            }
         }
     }
 
@@ -154,5 +163,17 @@ public class GameManager : MonoBehaviour
     private void ResetGhostMultiplier()
     {
         this.ghostMultiplier = 1;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.score = data.score;
+        this.highestScore = data.highestScore;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.score = this.score;
+        data.highestScore = this.highestScore;
     }
 }
