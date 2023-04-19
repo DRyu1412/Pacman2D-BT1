@@ -1,10 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public Ghost[] ghosts;
     public Pacman pacman;
     public Transform pellets;
+
+    public GameObject gameOverText;
+    public Text scoreText;
+    public Text livesText;
 
     public int ghostMultiplier { get; private set; } = 1;
     public int score { get; private set; }
@@ -32,6 +37,7 @@ public class GameManager : MonoBehaviour
     
     private void NewRound()
     {
+        gameOverText.SetActive(false);
         foreach (Transform pellet in this.pellets)
         {
             pellet.gameObject.SetActive(true);
@@ -54,6 +60,7 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        gameOverText.SetActive(true);
         for (int i = 0; i < this.ghosts.Length; i++)
         {
             this.ghosts[i].gameObject.SetActive(false);
@@ -64,11 +71,13 @@ public class GameManager : MonoBehaviour
     private void SetScore(int score)
     {
         this.score = score;
+        scoreText.text = score.ToString().PadLeft(2, '0');
     }
 
     private void SetLife(int lives)
     {
         this.lives = lives;
+        livesText.text = "x" + lives.ToString();
     }
 
     public void GhostEaten(Ghost ghost)
