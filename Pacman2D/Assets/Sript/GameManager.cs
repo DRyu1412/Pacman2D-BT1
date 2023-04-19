@@ -11,6 +11,15 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     public Text livesText;
 
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip deathAudio;
+    [SerializeField]
+    private AudioClip gameoverAudio;
+    [SerializeField]
+    private AudioClip winAudio;
+
     public int ghostMultiplier { get; private set; } = 1;
     public int score { get; private set; }
     public int lives { get; private set; }
@@ -67,6 +76,7 @@ public class GameManager : MonoBehaviour
         }
 
         this.pacman.gameObject.SetActive(false);
+        this.audioSource.PlayOneShot(gameoverAudio);
     }
     private void SetScore(int score)
     {
@@ -90,12 +100,13 @@ public class GameManager : MonoBehaviour
     public void PacmanEaten()
     {
         this.pacman.DeathSequence();
-
+        
         SetLife(this.lives - 1);
         
         if(this.lives > 0)
         {
             Invoke(nameof(ResetState), 3.0f);
+            this.audioSource.PlayOneShot(deathAudio);
         }
         else
         {
@@ -112,6 +123,7 @@ public class GameManager : MonoBehaviour
         {
             this.pacman.gameObject.SetActive(false);
             Invoke(nameof(NewRound), 3.0f);
+            this.audioSource.PlayOneShot(winAudio);
         }
     }
 
