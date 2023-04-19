@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
 
     public void PacmanEaten()
     {
-        this.pacman.DeathSequence();
+        this.pacman.gameObject.SetActive(false);
 
         SetLife(this.lives - 1);
         
