@@ -42,10 +42,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     private void NewGame()
     {
-        SetScore(0);
         SetLife(3);
         NewRound();
-        highestScoreText.text = "highest: " +  highestScore.ToString().PadLeft(2, '0');
     }
     
     private void NewRound()
@@ -169,6 +167,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         this.score = data.score;
         this.highestScore = data.highestScore;
+        highestScoreText.text = "highest: " + highestScore.ToString().PadLeft(2, '0');
     }
 
     public void SaveData(GameData data)
