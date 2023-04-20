@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     private void Start()
     {
-        NewGame();  
+
     }
 
     private void Update()
@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         SetLife(3);
         NewRound();
+        SetScore(0);
     }
     
     private void NewRound()
@@ -79,6 +80,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
         this.pacman.gameObject.SetActive(false);
         this.audioSource.PlayOneShot(gameoverAudio);
+
     }
     private void SetScore(int score)
     {
