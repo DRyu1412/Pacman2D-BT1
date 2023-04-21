@@ -5,6 +5,7 @@ public class GhostChase : GhostBehavior
     private void OnDisable()
     {
         this.ghost.scatter.Enable();
+        this.ghost.ghostState = "scatter";
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

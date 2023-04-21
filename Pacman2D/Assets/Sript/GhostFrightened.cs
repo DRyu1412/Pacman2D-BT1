@@ -48,6 +48,7 @@ public class GhostFrightened : GhostBehavior
         this.ghost.transform.position = position;
 
         this.ghost.home.Enable(this.duration);
+        this.ghost.ghostInHome = true;
 
         this.body.enabled = false;
         this.eyes.enabled = true;

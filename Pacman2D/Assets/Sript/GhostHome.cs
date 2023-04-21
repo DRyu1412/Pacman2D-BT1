@@ -59,5 +59,7 @@ public class GhostHome : GhostBehavior
         this.ghost.movement.SetDirection(new Vector2(Random.value < 0.5f ? -1.0f : 1.0f, 0.0f), true);
         this.ghost.movement.rigidbody.isKinematic = false;
         this.ghost.movement.enabled = true;
+        this.ghost.ghostInHome = false;
+
     }
 }

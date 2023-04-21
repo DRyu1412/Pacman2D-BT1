@@ -1,7 +1,13 @@
 using UnityEngine;
 
-public class Ghost : MonoBehaviour
+public class Ghost : MonoBehaviour, IDataPersistence 
 {
+    public string ghostName;
+    public Vector3 position;
+    public Vector2 direction;
+    public string ghostState;
+    public bool ghostInHome = true;
+
     public Movement movement { get; private set; }
     public GhostHome home { get; private set; }
     public GhostScatter scatter { get; private set; }
@@ -23,7 +29,8 @@ public class Ghost : MonoBehaviour
 
     private void Start()
     {
-        ResetState();
+        //SetGhostState();
+        //ResetState();
     }
 
     public void ResetState()
@@ -34,16 +41,21 @@ public class Ghost : MonoBehaviour
         this.frightened.Disable();
         this.chase.Disable();
         this.scatter.Enable();
-        
-        if(this.home != this.initialBehavior)
-        {
-            this.home.Disable();
-        }
+        this.ghostState = "scatter";
 
-        if(this.initialBehavior != null)
+        if (this.initialBehavior != null)
         {
             this.initialBehavior.Enable();
+            this.ghostInHome = true;
         }
+
+        if (this.home != this.initialBehavior)
+        {
+            this.home.Disable();
+            this.ghostInHome = false;
+        }
+
+       
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -59,5 +71,70 @@ public class Ghost : MonoBehaviour
                 FindObjectOfType<GameManager>().PacmanEaten();
             }
         }
+    }
+
+    public void SetGhostState()
+    {
+        
+        if(ghostState == "scatter")
+        {
+            this.frightened.Disable();
+            this.chase.Disable();
+            this.scatter.Enable();
+
+        }
+        if(ghostState == "chase")
+        {
+            this.frightened.Disable();
+            this.chase.Enable();
+            this.scatter.Disable();
+
+        }
+
+        if (ghostInHome == true)
+        {
+            this.home.Enable();
+        }
+
+    }
+    public void LoadData(GameData data)
+    {
+        data.ghostPosition.TryGetValue(ghostName, out this.position);
+        this.transform.position = position;
+        data.ghostDirection.TryGetValue(ghostName, out this.direction);
+        this.movement.SetDirection(this.direction);
+        data.ghostInHome.TryGetValue(ghostName, out ghostInHome);
+        data.ghostState.TryGetValue(ghostName, out this.ghostState);
+        this.SetGhostState();
+
+       
+    }
+
+    public void SaveData(GameData data)
+    {
+        if (data.ghostPosition.ContainsKey(ghostName))
+        {
+            data.ghostPosition.Remove(ghostName);
+        }
+        data.ghostPosition.Add(ghostName, this.transform.position);
+
+        if (data.ghostState.ContainsKey(ghostName))
+        {
+            data.ghostState.Remove(ghostName);
+        }
+        data.ghostState.Add(ghostName, this.ghostState);
+
+        if (data.ghostInHome.ContainsKey(ghostName))
+        {
+            data.ghostInHome.Remove(ghostName);
+        }
+        data.ghostInHome.Add(ghostName, this.ghostInHome);
+
+        if (data.ghostDirection.ContainsKey(ghostName))
+        {
+            data.ghostDirection.Remove(ghostName);
+        }
+        data.ghostDirection.Add(ghostName, this.movement.direction);
+
     }
 }
