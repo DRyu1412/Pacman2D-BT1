@@ -7,8 +7,10 @@ public class GameData
 {
     public int score;
     public int highestScore;
+    public int lives;
     public Vector3 playerPosition;
-    public SerializableDictionary<string, bool> coinsCollected;
+    public Vector2 pacmanDirection;
+    public SerializableDictionary<Vector3, bool> pelletsCollected;
 
     // the values defined in this constructor will be the default values
     // the game starts with when there's no data to load
@@ -16,7 +18,9 @@ public class GameData
     {
         this.score = 0;
         this.highestScore = 0;
-        playerPosition = Vector3.zero;
-        coinsCollected = new SerializableDictionary<string, bool>();
+        this.lives = 3;
+        playerPosition = new Vector3(0, -9.5f, -5f);
+        pacmanDirection = Vector2.right;
+        pelletsCollected = new SerializableDictionary<Vector3, bool>();
     }
 }

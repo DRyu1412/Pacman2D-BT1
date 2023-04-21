@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     }
 
 
-    private void NewGame()
+    public void NewGame()
     {
         SetLife(3);
         NewRound();
@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void PelletEaten(Pellet pellet)
     {
         pellet.gameObject.SetActive(false);
+        pellet.collected = true;
         SetScore(this.score + pellet.point);
 
         if (!HasRemainingPellet())
@@ -169,12 +170,26 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         this.score = data.score;
         this.highestScore = data.highestScore;
-        highestScoreText.text = "highest: " + highestScore.ToString().PadLeft(2, '0');
+        this.lives = data.lives;
+        this.pacman.transform.position = data.playerPosition;
+        this.pacman.movement.SetDirection(data.pacmanDirection);
+        this.LoadDisplay();
+
     }
 
     public void SaveData(GameData data)
     {
         data.score = this.score;
         data.highestScore = this.highestScore;
+        data.lives = this.lives;
+        data.playerPosition = this.pacman.transform.position;
+        data.pacmanDirection = this.pacman.movement.direction;
+    }
+
+    public void LoadDisplay()
+    {
+        scoreText.text = score.ToString().PadLeft(2, '0');
+        highestScoreText.text = "highest: " + highestScore.ToString().PadLeft(2, '0');
+        livesText.text = "x" + lives.ToString();
     }
 }

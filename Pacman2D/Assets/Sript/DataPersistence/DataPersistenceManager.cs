@@ -34,6 +34,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void NewGame() 
     {
         this.gameData = new GameData();
+        FindObjectOfType<GameManager>().NewGame();
     }
 
     public void LoadGame()
