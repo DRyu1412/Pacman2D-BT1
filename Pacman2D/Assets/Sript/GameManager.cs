@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public Text livesText;
     public Text highestScoreText;
     public GameObject ESC_Menu;
+    public GameObject Start_Menu;
 
 
     public float pauseTime;
@@ -32,7 +33,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     private void Start()
     {
-
+        this.Start_Menu.SetActive(true);
+        this.PauseGame();
     }
 
     private void Update()
@@ -245,5 +247,18 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void QuitButtonClick()
     {
         Application.Quit();
+    }
+
+    public void ContinueButtonClick()
+    {
+        this.Start_Menu.SetActive(false);
+        this.UnPauseGame();
+    }
+
+    public void NewGameButtonClick()
+    {
+        this.Start_Menu.SetActive(false);
+        this.NewGame();
+        this.UnPauseGame();
     }
 }
