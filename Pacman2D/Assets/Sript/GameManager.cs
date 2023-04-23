@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public Text scoreText;
     public Text livesText;
     public Text highestScoreText;
+    public GameObject ESC_Menu;
+
+
+    public float pauseTime;
 
     [SerializeField]
     private AudioSource audioSource;
@@ -36,6 +40,36 @@ public class GameManager : MonoBehaviour, IDataPersistence
         if(lives <= 0 && Input.anyKeyDown)
         {
             NewGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (this.ESC_Menu.gameObject.activeSelf)
+            {
+                this.ESC_Menu.gameObject.SetActive(false);             
+                this.pacman.movement.enabled = true;
+                for (int i = 0; i < this.ghosts.Length; i++)
+                {
+                    this.ghosts[i].movement.enabled = true;
+                    if (this.ghosts[i].ghostInHome)
+                    {
+                        this.ghosts[i].home.Enable();
+                    }
+                }
+            }
+            else
+            {
+                this.ESC_Menu.gameObject.SetActive(true);           
+                this.pacman.movement.enabled = false;
+                for (int i = 0; i < this.ghosts.Length; i++)
+                {
+                    this.ghosts[i].movement.enabled = false;
+                    if (this.ghosts[i].ghostInHome)
+                    {
+                        this.ghosts[i].home.Enable(pauseTime);
+                    }
+                }
+            }
         }
     }
 
