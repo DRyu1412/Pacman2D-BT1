@@ -46,33 +46,16 @@ public class GameManager : MonoBehaviour, IDataPersistence
         {
             if (this.ESC_Menu.gameObject.activeSelf)
             {
-                this.ESC_Menu.gameObject.SetActive(false);             
-                this.pacman.movement.enabled = true;
-                for (int i = 0; i < this.ghosts.Length; i++)
-                {
-                    this.ghosts[i].movement.enabled = true;
-                    if (this.ghosts[i].ghostInHome)
-                    {
-                        this.ghosts[i].home.Enable();
-                    }
-                }
+                this.ESC_Menu.gameObject.SetActive(false);
+                this.UnPauseGame();
             }
             else
             {
-                this.ESC_Menu.gameObject.SetActive(true);           
-                this.pacman.movement.enabled = false;
-                for (int i = 0; i < this.ghosts.Length; i++)
-                {
-                    this.ghosts[i].movement.enabled = false;
-                    if (this.ghosts[i].ghostInHome)
-                    {
-                        this.ghosts[i].home.Enable(pauseTime);
-                    }
-                }
+                this.ESC_Menu.gameObject.SetActive(true);
+                this.PauseGame();
             }
         }
     }
-
 
     public void NewGame()
     {
@@ -225,5 +208,42 @@ public class GameManager : MonoBehaviour, IDataPersistence
         scoreText.text = score.ToString().PadLeft(2, '0');
         highestScoreText.text = "highest: " + highestScore.ToString().PadLeft(2, '0');
         livesText.text = "x" + lives.ToString();
+    }
+
+    public void PauseGame()
+    {
+        this.pacman.movement.enabled = false;
+        for (int i = 0; i < this.ghosts.Length; i++)
+        {
+            this.ghosts[i].movement.enabled = false;
+            if (this.ghosts[i].ghostInHome)
+            {
+                this.ghosts[i].home.Enable(pauseTime);
+            }
+        }
+    }
+
+    public void UnPauseGame()
+    {
+        this.pacman.movement.enabled = true;
+        for (int i = 0; i < this.ghosts.Length; i++)
+        {
+            this.ghosts[i].movement.enabled = true;
+            if (this.ghosts[i].ghostInHome)
+            {
+                this.ghosts[i].home.Enable();
+            }
+        }
+    }
+
+    public void ResumeButtonClick()
+    {
+        this.ESC_Menu.gameObject.SetActive(false);
+        this.UnPauseGame();
+    }
+
+    public void QuitButtonClick()
+    {
+        Application.Quit();
     }
 }
