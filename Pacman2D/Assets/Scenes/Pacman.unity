@@ -1057,7 +1057,7 @@ MonoBehaviour:
   highestScoreText: {fileID: 383631494}
   ESC_Menu: {fileID: 63009416}
   Start_Menu: {fileID: 289737656}
-  pauseTime: 100
+  pauseTime: 1000
   audioSource: {fileID: 464163993}
   deathAudio: {fileID: 8300000, guid: 00acb4949125eac40b3b4108eaf76e58, type: 3}
   gameoverAudio: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
